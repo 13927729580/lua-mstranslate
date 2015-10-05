@@ -66,7 +66,7 @@ To install lua-curl::
 Feedback
 --------
 
-Write email to areski@gmail.com or post bugs and feature requests on github:
+Feedback are more than welcome, post bugs and feature requests on github:
 
 http://github.com/newfies-dialer/lua-mstranslate/issues
 
