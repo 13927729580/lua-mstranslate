@@ -1,6 +1,6 @@
 --
 -- mstranslate.lua - Lua wrapper for text-to-speech synthesis with Microsoft Translate
--- Copyright (C) 2012-2015 Arezqui Belaid <areski@gmail.com> and Joshua Patten <joshpatten@gmail.com>
+-- Copyright (C) 2015 Arezqui Belaid <areski@gmail.com> and Joshua Patten <joshpatten@gmail.com>
 --
 -- Permission is hereby granted, free of charge, to any person
 -- obtaining a copy of this software and associated documentation files
@@ -110,16 +110,16 @@ function ms_token_gen(clientID, clientSecret)
 		return jdata["access_token"]
 end
 
-	
-	
+
+
 --
 -- MSTranslate Class
 --
 
 local MSTranslate = {
     -- default field values
-    APPLICATION_LOGIN = 'EVAL_XXXXXXX',
-    APPLICATION_PASSWORD = 'XXXXXXXX',
+    CLIENT_ID = 'XXXXXXXXXXXX',
+    CLIENT_SECRET = 'YYYYYYYYYYYYYY',
 
     SERVICE_URL = 'http://api.microsofttranslator.com/V2/Http.svc/Speak',
     LANGUAGE = 'en',
@@ -133,7 +133,7 @@ local MSTranslate = {
 }
 
 -- Meta information
-MSTranslate._COPYRIGHT   = "Copyright (C) 2014-2015 Areski and Joshua"
+MSTranslate._COPYRIGHT   = "Copyright (C) 2015 Areski and Joshua"
 MSTranslate._DESCRIPTION = "Lua wrapper for text-to-speech synthesis with Microsoft Translate"
 MSTranslate._VERSION     = "lua-mstranslate 0.1"
 
@@ -146,53 +146,6 @@ function MSTranslate:new (o)
 end
 
 function MSTranslate:prepare(textstr, lang)
-
-    -- Available languages list as of 20-Sep-2015
-    -- ca
-	-- ca-es
-	-- da
-	-- da-dk
-	-- de
-	-- de-de
-	-- en
-	-- en-au
-	-- en-ca
-	-- en-gb
-	-- en-in
-	-- en-us
-	-- es
-	-- es-es
-	-- es-mx
-	-- fi
-	-- fi-fi
-	-- fr
-	-- fr-ca
-	-- fr-fr
-	-- it
-	-- it-it
-	-- ja
-	-- ja-jp
-	-- ko
-	-- ko-kr
-	-- nb-no
-	-- nl
-	-- nl-nl
-	-- no
-	-- pl
-	-- pl-pl
-	-- pt
-	-- pt-br
-	-- pt-pt
-	-- ru
-	-- ru-ru
-	-- sv
-	-- sv-se
-	-- zh-chs
-	-- zh-cht
-	-- zh-cn
-	-- zh-hk
-	-- zh-tw
-
     -- Prepare Microsoft Translate TTS
     if string.len(textstr) == 0 then
         return false
@@ -225,7 +178,7 @@ function MSTranslate:run()
         return self.DIRECTORY..self.filename
     else
         -- Generate Authorization Token
-		token = ms_token_gen(self.APPLICATION_LOGIN, self.APPLICATION_PASSWORD)
+		token = ms_token_gen(self.CLIENT_ID, self.CLIENT_SECRET)
 		-- Build Authorization Header
 		auth_header = "Authorization: Bearer "..token
 		-- Get all the Get params and encode them
@@ -237,7 +190,7 @@ function MSTranslate:run()
             get_params = get_params..tostring(k)..'='..url_encode(v)
         end
 
-        print("===HTTP=== HEADER:"..auth_header.."\nCALL:"..self.SERVICE_URL..'?'..get_params, self.DIRECTORY..self.filename)
+        -- print("===HTTP=== HEADER:"..auth_header.."\nCALL:"..self.SERVICE_URL..'?'..get_params, self.DIRECTORY..self.filename)
         ms_wget(self.SERVICE_URL..'?'..get_params, auth_header, self.DIRECTORY..self.filename)
 
         if file_exists(self.DIRECTORY..self.filename) then

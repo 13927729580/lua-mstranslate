@@ -1,35 +1,33 @@
-===========
+===============
 lua-mstranslate
-===========
+===============
 
 :Author: Arezqui Belaid and Joshua Patten
 :Description: Lua wrapper for text-to-speech synthesis with Microsoft Translate
+:Contributors: `list of contributors <https://github.com/newfies-dialer/lua-mstranslate/graphs/contributors>`_
 :License: MIT
 
 
 Lua Microsoft Translate Wrapper
-===================
+-------------------------------
 
 lua-mstranslate is a library to produce a text-to-speech file using `Microsoft Translate`_ web services.
 
-.. _Microsoft Translate: http://www.microsoft.com/en-us/translator/translatorapi.aspx
-
 In order to utilize this service you must sign up for Microsoft Translator service and register an application. More information on creating a Microsoft account is located at the `getting started with Microsoft Translator API`_ page.
 
-.. _getting started with Microsoft Translator API: https://www.microsoft.com/en-us/translator/getstarted.aspx
 
 Quickstart
-==========
+----------
 
 ::
 
     MSTranslate = require "mstranslate"
 
-    APPLICATION_LOGIN = 'EVAL_XXXXXXX'
-    APPLICATION_PASSWORD = 'XXXXXXXX'
+    CLIENT_ID = 'XXXXXXXXXXXX'
+    CLIENT_SECRET = 'YYYYYYYYYYYYYY'
     SERVICE_URL = 'http://api.microsofttranslator.com/V2/Http.svc/Speak'
 
-    tts_mstranslate = MSTranslate:new(APPLICATION_LOGIN, APPLICATION_PASSWORD, SERVICE_URL, directory)
+    tts_mstranslate = MSTranslate:new(CLIENT_ID, CLIENT_SECRET, SERVICE_URL, directory)
 
     TEXT = "This is a test of the Microsoft Translate text to speech service."
     LANG = 'EN'
@@ -90,3 +88,7 @@ Source download
 The source code is currently available on github. Fork away!
 
 http://github.com/newfies-dialer/lua-mstranslate
+
+
+.. _Microsoft Translate: http://www.microsoft.com/en-us/translator/translatorapi.aspx
+.. _getting started with Microsoft Translator API: https://www.microsoft.com/en-us/translator/getstarted.aspx
