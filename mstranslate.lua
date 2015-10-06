@@ -113,10 +113,10 @@ end
 
 
 --
--- MSTranslate Class
+-- MSSpeak Class
 --
 
-local MSTranslate = {
+local MSSpeak = {
     -- default field values
     CLIENT_ID = 'XXXXXXXXXXXX',
     CLIENT_SECRET = 'YYYYYYYYYYYYYY',
@@ -133,19 +133,19 @@ local MSTranslate = {
 }
 
 -- Meta information
-MSTranslate._COPYRIGHT   = "Copyright (C) 2015 Areski and Joshua"
-MSTranslate._DESCRIPTION = "Lua wrapper for text-to-speech synthesis with Microsoft Translate"
-MSTranslate._VERSION     = "lua-mstranslate 0.1"
+MSSpeak._COPYRIGHT   = "Copyright (C) 2015 Areski and Joshua"
+MSSpeak._DESCRIPTION = "Lua wrapper for text-to-speech synthesis with Microsoft Translate"
+MSSpeak._VERSION     = "lua-msspeak 0.1"
 
 
-function MSTranslate:new (o)
+function MSSpeak:new (o)
     o = o or {}   -- create object if user does not provide one
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function MSTranslate:prepare(textstr, lang)
+function MSSpeak:prepare(textstr, lang)
     -- Prepare Microsoft Translate TTS
     if string.len(textstr) == 0 then
         return false
@@ -154,7 +154,7 @@ function MSTranslate:prepare(textstr, lang)
     concatkey = textstr..'-'..lang
     hash = md5.sumhexa(concatkey)
 
-    key = 'mstranslate'..'_'..hash
+    key = 'msspeak'..'_'..hash
     self.filename = key..'-'..lang..'.wav'
 
     self.data = {
@@ -165,12 +165,12 @@ function MSTranslate:prepare(textstr, lang)
     }
 end
 
-function MSTranslate:set_cache(value)
+function MSSpeak:set_cache(value)
     -- Enable Cache of file, if files already stored return this filename
     self.cache = value
 end
 
-function MSTranslate:run()
+function MSSpeak:run()
     -- Run will call Microsoft Translate API and reproduce audio
 
     -- Check if file exists
@@ -203,4 +203,4 @@ function MSTranslate:run()
     end
 end
 
-return MSTranslate
+return MSSpeak
